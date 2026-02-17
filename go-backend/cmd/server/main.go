@@ -2,17 +2,15 @@ package main
 
 import (
 	"context"
+	"jobfit-ai/internal/config"
 	"log"
-
-	"your_project/config"
 )
 
 func main() {
-	pool := config.ConnectDB()
+	pool := config.ConnectionDb()
 	defer pool.Close()
 	log.Println("DB connected ✅")
 
-	// test query
 	var version string
 	err := pool.QueryRow(context.Background(), "SELECT version()").Scan(&version)
 	if err != nil {
